@@ -1,3 +1,13 @@
+:root {
+  --bgcolor: #F4F6FA;
+  --textcolor: #000000;
+  --textcolor2: #637283;
+  --brr: 24px;
+}
+
+@import url(./assets/styles/Header.css);
+@import url(./assets/styles/SectionOne.css);
+
 @font-face {
   font-family: 'Onest';
   src: url('./assets/fonts/Onest/Onest-VariableFont_wght.woff2') format('woff2');

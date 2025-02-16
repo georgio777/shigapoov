@@ -1,14 +1,13 @@
-import {Link} from "react-router";
-import '../assets/styles/Header.css'
-import { motion } from "motion/react"
-import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router";
+import { motion } from "motion/react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
-function Header({headerHeight, setHeight}) {
+function Header({ headerHeight, setHeight }) {
   const [isVisible, setVisible] = useState(true); // Начально элемент виден
   const [lastScrollY, setLastScrollY] = useState(0); // Отслеживаем положение прокрутки
-	const header = useRef()
+  const header = useRef();
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (window.scrollY > lastScrollY) {
       // Если прокрутка идет вниз
       setVisible(false); // Скрываем элемент
@@ -18,7 +17,7 @@ function Header({headerHeight, setHeight}) {
     }
 
     setLastScrollY(window.scrollY); // Обновляем позицию прокрутки
-  };
+  }, [lastScrollY]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll); // Добавляем обработчик прокрутки
@@ -26,15 +25,15 @@ function Header({headerHeight, setHeight}) {
     return () => {
       window.removeEventListener('scroll', handleScroll); // Убираем обработчик при размонтировании
     };
-  }, [lastScrollY]); // Зависит от lastScrollY
+  }, [handleScroll]); // Зависит от handleScroll
 
-	useEffect(()=>{
-		setHeight(header.current.offsetHeight)
-	},[])
+  useEffect(() => {
+    setHeight(header.current.offsetHeight);
+  }, [setHeight]);
 
   return (
     <motion.div
-			ref={header}
+      ref={header}
       className="lcontainer"
       style={{
         position: 'fixed',
@@ -53,14 +52,14 @@ function Header({headerHeight, setHeight}) {
           {/* Якорная ссылка на раздел "Цены" на главной странице */}
           <a href="/#prices">Цены</a>
         </nav>
-				<a href="tel:+89118428490">8 911 842 84 90</a>
-				<div className="hamburger__wrapper">
-				<span className="topline"></span>
-				<span className="bottomline"></span>
-			</div>
+        <a href="tel:+89118428490">8 911 842 84 90</a>
+        <div className="hamburger__wrapper">
+          <span className="topline"></span>
+          <span className="bottomline"></span>
+        </div>
       </header>
     </motion.div>
-  )
+  );
 }
 
-export default Header
+export default Header;
