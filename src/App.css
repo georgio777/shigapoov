@@ -1,38 +1,40 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: 'Onest';
+  src: url('./assets/fonts/Onest/Onest-VariableFont_wght.woff2') format('woff2');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: 'Unbounded';
+  src: url('./assets/fonts/Unbounded/Unbounded-Bold.woff2') format('woff2');
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Onest';
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+a {
+  text-decoration: none;
+  color: black;
 }
 
-.App-link {
-  color: #61dafb;
+main {
+  height: 200vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.lcontainer {
+  width: 100%;
+  padding: 0 60px;
+}
+
+.outer__container {
+  width: 100%;
+  padding: 0 25px;
+}
+
+.inner__container {
+  width: 100%;
+  padding: 0 35px;
 }
