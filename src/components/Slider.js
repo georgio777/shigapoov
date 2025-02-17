@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 
-
-// Контент слайдов. Сохраняется в массив slides и разворачивается в компоненте
+// Контент слайдов
 const slide1 = (
   <div className='slide__content inner__container'>
     <div className='slide__left'>
       <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
-      <p className='slide__left--text'>Недорогие полнофункциональные решения для малого бизнеса и ИП</p>
-      <button>kek</button>
+      <p className='slide__left--text'>
+        Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
+      </p>
+      <button className='slider__button'>kek</button>
     </div>
     <div className='slide__right'>
       <p className='slide__right--text'>Проектов реализовано</p>
@@ -23,7 +24,7 @@ const slide2 = (
     <div className='slide__left'>
       <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
       <p className='slide__left--text'>Недорогие полнофункциональные решения для малого бизнеса и ИП</p>
-      <button>kek</button>
+      <button className='slider__button'>kek</button>
     </div>
     <div className='slide__right'>
       <p className='slide__right--text'>Проектов реализовано</p>
@@ -37,7 +38,7 @@ const slide3 = (
     <div className='slide__left'>
       <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
       <p className='slide__left--text'>Недорогие полнофункциональные решения для малого бизнеса и ИП</p>
-      <button>kek</button>
+      <button className='slider__button'>kek</button>
     </div>
     <div className='slide__right'>
       <p className='slide__right--text'>Проектов реализовано</p>
@@ -51,7 +52,7 @@ const slide4 = (
     <div className='slide__left'>
       <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
       <p className='slide__left--text'>Недорогие полнофункциональные решения для малого бизнеса и ИП</p>
-      <button>kek</button>
+      <button className='slider__button'>kek</button>
     </div>
     <div className='slide__right'>
       <p className='slide__right--text'>Проектов реализовано</p>
@@ -65,37 +66,46 @@ const slides = [slide1, slide2, slide3, slide4];
 const text1 = (
   <>
     <h2 className='slide__pagination--heading'>Сайты</h2>
-    <p className='slide__pagination--description'>Разработка корпоративных сайтов и лендингов, с уникальным дизайном</p>
+    <p className='slide__pagination--description'>
+      Разработка корпоративных сайтов и лендингов, с уникальным дизайном
+    </p>
   </>
-)
+);
 
 const text2 = (
   <>
     <h2 className='slide__pagination--heading'>E-Commerce</h2>
-    <p className='slide__pagination--description'>Разработка интернет-магазинов с возможностью  онлайн оплаты и доставкой</p>
+    <p className='slide__pagination--description'>
+      Разработка интернет-магазинов с возможностью онлайн оплаты и доставкой
+    </p>
   </>
-)
+);
 
 const text3 = (
   <>
     <h2 className='slide__pagination--heading'>Маркетинг</h2>
-    <p className='slide__pagination--description'>От SEO продвижения до контекстной рекламы и SMM. Приводим целевой трафик</p>
+    <p className='slide__pagination--description'>
+      От SEO продвижения до контекстной рекламы и SMM. Приводим целевой трафик
+    </p>
   </>
-)
+);
 
 const text4 = (
   <>
     <h2 className='slide__pagination--heading'>Bitrix24</h2>
-    <p className='slide__pagination--description'>Систематизируем Ваш бизнес. Профессиональное внедрение Битрикс24</p>
+    <p className='slide__pagination--description'>
+      Систематизируем Ваш бизнес. Профессиональное внедрение Битрикс24
+    </p>
   </>
-)
+);
 
-const slideTexts = [text1, text2, text3, text4]
+const slideTexts = [text1, text2, text3, text4];
 
 const Slider = ({ autoPlayInterval = 6000 }) => {
-  // Подготавливаем массив с клонами: [last, ...slides, first]
+  // Массив с клонами: [last, ...slides, first]
   const slidesWithClones = [slides[slides.length - 1], ...slides, slides[0]];
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [disableTransition, setDisableTransition] = useState(false);
   const sliderRef = useRef(null);
   const autoPlayTimer = useRef(null);
   const isHovered = useRef(false);
@@ -128,18 +138,22 @@ const Slider = ({ autoPlayInterval = 6000 }) => {
     };
   }, [resetAutoPlay]);
 
-  // После анимации корректируем индекс для бесконечной прокрутки
-  useEffect(() => {
+  // Обработчик завершения анимации
+  const handleAnimationComplete = () => {
     if (currentIndex === slidesWithClones.length - 1) {
-      // Если достигли клона первого слайда, переключаемся на реальный первый слайд
-      setTimeout(() => setCurrentIndex(1), 100);
+      // Если мы на клоне первого слайда
+      setDisableTransition(true);
+      setCurrentIndex(1);
+      setTimeout(() => setDisableTransition(false), 50);
     } else if (currentIndex === 0) {
-      // Если достигли клона последнего слайда, переключаемся на реальный последний слайд
-      setTimeout(() => setCurrentIndex(slidesWithClones.length - 2), 100);
+      // Если мы на клоне последнего слайда
+      setDisableTransition(true);
+      setCurrentIndex(slidesWithClones.length - 2);
+      setTimeout(() => setDisableTransition(false), 50);
     }
-  }, [currentIndex, slidesWithClones.length]);
+  };
 
-  // Обработчики свайпов (используя react-swipeable)
+  // Обработчики свайпов (с react-swipeable)
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
       nextSlide();
@@ -163,11 +177,16 @@ const Slider = ({ autoPlayInterval = 6000 }) => {
     resetAutoPlay();
   };
 
-  // Обработчик для клика по пагинации
+  // Обработчик клика по пагинации
   const handlePaginationClick = (index) => {
     setCurrentIndex(index);
     resetAutoPlay();
   };
+
+  // Вычисляем настройки перехода: если disableTransition=true, duration = 0
+  const transitionSetting = disableTransition 
+    ? { duration: 0 } 
+    : { type: 'tween', duration: 0.3 };
 
   return (
     <div
@@ -189,7 +208,8 @@ const Slider = ({ autoPlayInterval = 6000 }) => {
         animate={{
           x: -currentIndex * (100 / slidesWithClones.length) + '%'
         }}
-        transition={{ type: 'tween', duration: 0.3 }}
+        transition={transitionSetting}
+        onAnimationComplete={handleAnimationComplete}
       >
         {slidesWithClones.map((slide, index) => (
           <div
@@ -206,20 +226,18 @@ const Slider = ({ autoPlayInterval = 6000 }) => {
       </motion.div>
 
       {/* Кнопки навигации */}
-      <button
-        className="prev-button"
-        onClick={() => { prevSlide(); resetAutoPlay(); }}
-        style={{ position: 'absolute', bottom: '20px', left: '10px', zIndex: 10 }}
-      >
-        Prev
-      </button>
-      <button
-        className="next-button"
-        onClick={() => { nextSlide(); resetAutoPlay(); }}
-        style={{ position: 'absolute', bottom: '20px', left: '70px', zIndex: 10 }}
-      >
-        Next
-      </button>
+      <div className="buttons__container inner__container">
+        <button
+          className="prev-button slider__navigation--button sprite"
+          onClick={() => { prevSlide(); resetAutoPlay(); }}
+          style={{ zIndex: 10 }}
+        />
+        <button
+          className="next-button slider__navigation--button sprite"
+          onClick={() => { nextSlide(); resetAutoPlay(); }}
+          style={{ zIndex: 10 }}
+        />
+      </div>
 
       {/* Пагинация + Текстовые блоки */}
       <div
@@ -232,7 +250,6 @@ const Slider = ({ autoPlayInterval = 6000 }) => {
         }}
       >
         {slides.map((_, i) => {
-          // Определяем активный слайд: currentIndex - 1 (учитывая клоны)
           const isActive = (currentIndex - 1 + slides.length) % slides.length === i;
           return (
             <div
@@ -242,9 +259,9 @@ const Slider = ({ autoPlayInterval = 6000 }) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 width: '100%',
-                cursor: 'pointer', // Добавляем курсор при наведении
+                cursor: 'pointer',
               }}
-              onClick={() => handlePaginationClick(i + 1)} // Сдвигаем на нужный слайд
+              onClick={() => handlePaginationClick(i + 1)}
             >
               <div
                 className="pagination-item"

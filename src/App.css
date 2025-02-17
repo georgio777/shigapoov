@@ -21,6 +21,10 @@
   src: url('./assets/fonts/Unbounded/Unbounded-Bold.woff2') format('woff2');
 }
 
+.sprite {
+  background-image: url(./assets/sprite.png);
+}
+
 * {
   margin: 0;
   padding: 0;
