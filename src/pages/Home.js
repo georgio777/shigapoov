@@ -12,8 +12,8 @@ const Home = () => {
       <section className='section__one'
       style={{ paddingTop: `${headerHeight}px` }}>
         <Slider 
-          slides={[<div>Content 1</div>, <div>Content 2</div>, <div>Content 3</div>]}
-          slideTexts={['Custom Text 1', 'Customыываы Text 2', 'Custom Text 3']}
+          // slides={[<div>Content 1</div>, <div>Content 2</div>, <div>Content 3</div>]}
+          // slideTexts={['Custom Text 1', 'Customыываы Text 2', 'Custom Text 3']}
         />
       </section>
     </div>

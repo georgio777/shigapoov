@@ -1,4 +1,5 @@
 .section__one {
     background-color: var(--bgcolor);
     border-radius: var(--brr);
+    padding-bottom: 40px;
 }
