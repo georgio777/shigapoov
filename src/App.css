@@ -5,6 +5,7 @@
   --brr: 24px;
   --fs: 16px;
   --smallfs: 14px;
+  font-size: 10px;
 }
 
 @import url(./assets/styles/Header.css);

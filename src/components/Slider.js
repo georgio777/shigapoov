@@ -2,66 +2,95 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 
-// Контент слайдов
-const slide1 = (
-  <div className='slide__content inner__container'>
-    <div className='slide__left'>
-      <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
-      <p className='slide__left--text'>
-        Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
-      </p>
-      <button className='slider__button'>kek</button>
-    </div>
-    <div className='slide__right'>
-      <p className='slide__right--text'>Проектов реализовано</p>
-      <span className='slide__counter'>58</span>
-    </div>
-  </div>
-);
 
-const slide2 = (
-  <div className='slide__content inner__container'>
-    <div className='slide__left'>
-      <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
-      <p className='slide__left--text'>Недорогие полнофункциональные решения для малого бизнеса и ИП</p>
-      <button className='slider__button'>kek</button>
+function Slide1() {
+  const [projectsCounter, setCounter] = useState(0);
+  const [counterSpeed, setCounterSpeed] = useState(5);
+  
+  useEffect(() => {
+    if (projectsCounter < 58) {
+      setTimeout(() => {
+        setCounter((value) => value + 1);
+        setCounterSpeed((speed) => speed + 2);
+      }, counterSpeed);
+    }
+  }, [projectsCounter, counterSpeed]);
+  return (
+    <div className='slide__content inner__container'>
+      <div className='slide__left'>
+        <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
+        <p className='slide__left--text'>
+          Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
+        </p>
+        <button className='slider__button sprite'></button>
+      </div>
+      <div className='slide__right'>
+        <div className='slide__right--inner'>
+          <p className='slide__right--text'>Проектов реализовано</p>
+          <span className='slide__counter'>{projectsCounter}</span>
+        </div>
+      </div>
     </div>
-    <div className='slide__right'>
-      <p className='slide__right--text'>Проектов реализовано</p>
-      <span className='slide__counter'>58</span>
-    </div>
-  </div>
-);
+)};
 
-const slide3 = (
-  <div className='slide__content inner__container'>
-    <div className='slide__left'>
-      <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
-      <p className='slide__left--text'>Недорогие полнофункциональные решения для малого бизнеса и ИП</p>
-      <button className='slider__button'>kek</button>
+function Slide2() {
+  return (
+    <div className='slide__content inner__container'>
+      <div className='slide__left'>
+        <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
+        <p className='slide__left--text'>
+          Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
+        </p>
+        <button className='slider__button sprite'></button>
+      </div>
+      <div className='slide__right'>
+        <div className='slide__right--inner'>
+          <p className='slide__right--text'>Проектов реализовано</p>
+          <span className='slide__counter'>58</span>
+        </div>
+      </div>
     </div>
-    <div className='slide__right'>
-      <p className='slide__right--text'>Проектов реализовано</p>
-      <span className='slide__counter'>58</span>
-    </div>
-  </div>
-);
+)};
 
-const slide4 = (
-  <div className='slide__content inner__container'>
-    <div className='slide__left'>
-      <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
-      <p className='slide__left--text'>Недорогие полнофункциональные решения для малого бизнеса и ИП</p>
-      <button className='slider__button'>kek</button>
+function Slide3() {
+  return (
+    <div className='slide__content inner__container'>
+      <div className='slide__left'>
+        <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
+        <p className='slide__left--text'>
+          Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
+        </p>
+        <button className='slider__button sprite'></button>
+      </div>
+      <div className='slide__right'>
+        <div className='slide__right--inner'>
+          <p className='slide__right--text'>Проектов реализовано</p>
+          <span className='slide__counter'>58</span>
+        </div>
+      </div>
     </div>
-    <div className='slide__right'>
-      <p className='slide__right--text'>Проектов реализовано</p>
-      <span className='slide__counter'>58</span>
-    </div>
-  </div>
-);
+)};
 
-const slides = [slide1, slide2, slide3, slide4];
+function Slide4() {
+  return (
+    <div className='slide__content inner__container'>
+      <div className='slide__left'>
+        <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
+        <p className='slide__left--text'>
+          Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
+        </p>
+        <button className='slider__button sprite'></button>
+      </div>
+      <div className='slide__right'>
+        <div className='slide__right--inner'>
+          <p className='slide__right--text'>Проектов реализовано</p>
+          <span className='slide__counter'>58</span>
+        </div>
+      </div>
+    </div>
+)};
+
+const slides = [<Slide1 />, <Slide2 />, <Slide3 />, <Slide4 />];
 
 const text1 = (
   <>
@@ -101,11 +130,12 @@ const text4 = (
 
 const slideTexts = [text1, text2, text3, text4];
 
-const Slider = ({ autoPlayInterval = 6000 }) => {
+const Slider = ({ autoPlayInterval = 60000 }) => {
   // Массив с клонами: [last, ...slides, first]
   const slidesWithClones = [slides[slides.length - 1], ...slides, slides[0]];
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [disableTransition, setDisableTransition] = useState(false);
+  // Изначально disableTransition true, чтобы отключить анимацию на монтировании
+  const [disableTransition, setDisableTransition] = useState(true);
   const sliderRef = useRef(null);
   const autoPlayTimer = useRef(null);
   const isHovered = useRef(false);
@@ -138,22 +168,25 @@ const Slider = ({ autoPlayInterval = 6000 }) => {
     };
   }, [resetAutoPlay]);
 
+  // Отключаем анимацию при монтировании
+  useEffect(() => {
+    setTimeout(() => setDisableTransition(false), 50);
+  }, []);
+
   // Обработчик завершения анимации
   const handleAnimationComplete = () => {
     if (currentIndex === slidesWithClones.length - 1) {
-      // Если мы на клоне первого слайда
       setDisableTransition(true);
       setCurrentIndex(1);
       setTimeout(() => setDisableTransition(false), 50);
     } else if (currentIndex === 0) {
-      // Если мы на клоне последнего слайда
       setDisableTransition(true);
       setCurrentIndex(slidesWithClones.length - 2);
       setTimeout(() => setDisableTransition(false), 50);
     }
   };
 
-  // Обработчики свайпов (с react-swipeable)
+  // Обработчики свайпов
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
       nextSlide();
@@ -183,7 +216,7 @@ const Slider = ({ autoPlayInterval = 6000 }) => {
     resetAutoPlay();
   };
 
-  // Вычисляем настройки перехода: если disableTransition=true, duration = 0
+  // Вычисляем настройки перехода
   const transitionSetting = disableTransition 
     ? { duration: 0 } 
     : { type: 'tween', duration: 0.3 };
@@ -202,7 +235,6 @@ const Slider = ({ autoPlayInterval = 6000 }) => {
         className="slider-track"
         style={{
           display: 'flex',
-          height: '500px',
           width: `${slidesWithClones.length * 100}%`,
         }}
         animate={{
