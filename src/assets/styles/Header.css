@@ -4,6 +4,8 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 33px 0;
+    position: relative;
+    z-index: 444;
 }
 
 header a {
@@ -29,9 +31,19 @@ header a {
     cursor: pointer;
     position: relative;
     margin-left: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 
-.topline {
+.hamburger__wrapper span {
+    width: 50px;
+    border-top: 1px solid black;
+}
+
+/* .topline {
     display: block;
     width: 50px;
     height: 1px;
@@ -49,7 +61,7 @@ header a {
     left: 5px;
     bottom: 20px;
     background-color: black;
-}
+} */
 
 @media (max-width: 1024px) {
     .header__navigation {

@@ -40,6 +40,7 @@ function Header({ headerHeight, setHeight }) {
         left: '0',
         top: '0',
         width: '100%',
+        zIndex: 5,
       }}
       animate={{ top: isVisible ? '0' : `-${headerHeight}px` }} // Анимация: скрытие/появление
       transition={{ duration: 0.3 }} // Длительность анимации

@@ -1,3 +1,11 @@
+.section__one {
+    background-color: var(--bgcolor);
+    border-radius: var(--brr);
+    padding-bottom: 40px;
+    margin-top: 20px;
+    min-height: 80vh;
+}
+
 .slide__content {
     display: flex;
     justify-content: space-between;
@@ -127,11 +135,12 @@
     border-radius: 100px;
     box-shadow: none;
     cursor: pointer;
+    z-index: 1;
 }
 .slider__button span {
     color: white;
     transition: 0.3s;
-    z-index: 2;
+    z-index: 3;
 }
 
 .slider__button::before {
@@ -145,7 +154,7 @@
     background: white;
     transition: 0.3s;
     border-radius: 50%;
-    z-index: 1;
+    z-index: 2;
 }
 
 .slider__button:hover span {
@@ -186,7 +195,7 @@
         display: none;
     }
     .slide__right {
-        display: none;
+        /* display: none; */
     }
     .slide__left {
         width: 100%;

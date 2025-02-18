@@ -7,15 +7,17 @@ import HeaderButton from './HeaderButton';
 function Slide1() {
   const [projectsCounter, setCounter] = useState(0);
   const [counterSpeed, setCounterSpeed] = useState(5);
+
+  const isVisible = window.innerWidth > 1025
   
   useEffect(() => {
-    if (projectsCounter < 58) {
+    if (isVisible && projectsCounter < 58) {
       setTimeout(() => {
         setCounter((value) => value + 1);
         setCounterSpeed((speed) => speed + 2);
       }, counterSpeed);
     }
-  }, [projectsCounter, counterSpeed]);
+  }, [projectsCounter, counterSpeed, isVisible]);
   return (
     <div className='slide__content inner__container'>
       <div className='slide__left'>
@@ -25,12 +27,14 @@ function Slide1() {
         </p>
         <HeaderButton />
       </div>
-      <div className='slide__right'>
-        <div className='slide__right--inner'>
-          <p className='slide__right--text'>Проектов реализовано</p>
-          <span className='slide__counter'>{projectsCounter}</span>
+      {isVisible && (
+        <div className='slide__right'>
+          <div className='slide__right--inner'>
+            <p className='slide__right--text'>Проектов реализовано</p>
+            <span className='slide__counter'>{projectsCounter}</span>
+          </div>
         </div>
-      </div>
+      )}
     </div>
 )};
 
@@ -42,7 +46,7 @@ function Slide2() {
         <p className='slide__left--text'>
           Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
         </p>
-        <button className='slider__button sprite'></button>
+        <button className='slider__button'></button>
       </div>
       <div className='slide__right'>
         <div className='slide__right--inner'>
@@ -61,7 +65,7 @@ function Slide3() {
         <p className='slide__left--text'>
           Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
         </p>
-        <button className='slider__button sprite'></button>
+        <button className='slider__button'></button>
       </div>
       <div className='slide__right'>
         <div className='slide__right--inner'>
@@ -80,7 +84,7 @@ function Slide4() {
         <p className='slide__left--text'>
           Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
         </p>
-        <button className='slider__button sprite'></button>
+        <button className='slider__button'></button>
       </div>
       <div className='slide__right'>
         <div className='slide__right--inner'>
@@ -263,12 +267,10 @@ const Slider = ({ autoPlayInterval = 60000 }) => {
         <button
           className="prev-button slider__navigation--button sprite"
           onClick={() => { prevSlide(); resetAutoPlay(); }}
-          style={{ zIndex: 10 }}
         />
         <button
           className="next-button slider__navigation--button sprite"
           onClick={() => { nextSlide(); resetAutoPlay(); }}
-          style={{ zIndex: 10 }}
         />
       </div>
 

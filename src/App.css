@@ -9,8 +9,8 @@
 }
 
 @import url(./assets/styles/Header.css);
-@import url(./assets/styles/SectionOne.css);
 @import url(./assets/styles/Slider.css);
+@import url(./assets/styles/Cases.css);
 
 @font-face {
   font-family: 'Onest';
