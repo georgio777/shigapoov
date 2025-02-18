@@ -46,13 +46,13 @@ function Header({ headerHeight, setHeight }) {
     >
       <header>
         <a href="/" className="header__logo">SHIGAPOV</a>
-        <nav style={{ display: 'flex', gap: '24px' }}>
+        <nav className="header__navigation">
           <Link to="/">Главная</Link>
           <Link to="/contacts">Контакты</Link>
           {/* Якорная ссылка на раздел "Цены" на главной странице */}
           <a href="/#prices">Цены</a>
         </nav>
-        <a href="tel:+89118428490">8 911 842 84 90</a>
+        <a className="header__phone" href="tel:+89118428490">8 911 842 84 90</a>
         <div className="hamburger__wrapper">
           <span className="topline"></span>
           <span className="bottomline"></span>

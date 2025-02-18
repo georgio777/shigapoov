@@ -2,4 +2,5 @@
     background-color: var(--bgcolor);
     border-radius: var(--brr);
     padding-bottom: 40px;
+    margin-top: 20px;
 }

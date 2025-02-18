@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
+import HeaderButton from './HeaderButton';
 
 
 function Slide1() {
@@ -22,7 +23,7 @@ function Slide1() {
         <p className='slide__left--text'>
           Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
         </p>
-        <button className='slider__button sprite'></button>
+        <HeaderButton />
       </div>
       <div className='slide__right'>
         <div className='slide__right--inner'>
@@ -273,26 +274,14 @@ const Slider = ({ autoPlayInterval = 60000 }) => {
 
       {/* Пагинация + Текстовые блоки */}
       <div
-        className="pagination-container inner__container"
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          marginTop: '10px',
-          gap: '5%'
-        }}
+        className="pagination__container inner__container"
       >
         {slides.map((_, i) => {
           const isActive = (currentIndex - 1 + slides.length) % slides.length === i;
           return (
             <div
+              className={`pagination__wrapper ${isActive? '' : 'disabled__pagination--wrapper'}`}
               key={i}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                width: '100%',
-                cursor: 'pointer',
-              }}
               onClick={() => handlePaginationClick(i + 1)}
             >
               <div

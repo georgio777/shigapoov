@@ -56,3 +56,19 @@ main {
   width: 100%;
   padding: 0 35px;
 }
+
+
+@media (max-width:768px) {
+  .lcontainer {
+    padding: 0 20px;
+  }
+  .outer__container {
+    width: 100%;
+    padding: 0 5px;
+  }
+  
+  .inner__container {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
