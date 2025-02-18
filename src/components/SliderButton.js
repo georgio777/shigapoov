@@ -1,5 +1,4 @@
-
-const HeaderButton = () => {
+const SliderButton = () => {
   return (
     <div className="slider__button">
       <span>&#10230;</span> 
@@ -7,4 +6,4 @@ const HeaderButton = () => {
   );
 };
 
-export default HeaderButton;
+export default SliderButton;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
-import HeaderButton from './HeaderButton';
+import SliderButton from './SliderButton';
 
 
 function Slide1() {
@@ -25,7 +25,7 @@ function Slide1() {
         <p className='slide__left--text'>
           Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
         </p>
-        <HeaderButton />
+        <SliderButton />
       </div>
       {isVisible && (
         <div className='slide__right'>
@@ -48,12 +48,6 @@ function Slide2() {
         </p>
         <button className='slider__button'></button>
       </div>
-      <div className='slide__right'>
-        <div className='slide__right--inner'>
-          <p className='slide__right--text'>Проектов реализовано</p>
-          <span className='slide__counter'>58</span>
-        </div>
-      </div>
     </div>
 )};
 
@@ -67,12 +61,6 @@ function Slide3() {
         </p>
         <button className='slider__button'></button>
       </div>
-      <div className='slide__right'>
-        <div className='slide__right--inner'>
-          <p className='slide__right--text'>Проектов реализовано</p>
-          <span className='slide__counter'>58</span>
-        </div>
-      </div>
     </div>
 )};
 
@@ -85,12 +73,6 @@ function Slide4() {
           Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
         </p>
         <button className='slider__button'></button>
-      </div>
-      <div className='slide__right'>
-        <div className='slide__right--inner'>
-          <p className='slide__right--text'>Проектов реализовано</p>
-          <span className='slide__counter'>58</span>
-        </div>
       </div>
     </div>
 )};

@@ -23,6 +23,10 @@
 
 .post__preview {
     position: relative;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .post__preview--img {
@@ -90,11 +94,73 @@
     color: white;
 }
 
+.post__preview--additional {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: fit-content;
+}
+
+
+.button__additional {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 25px;
+    font-size: 1.6rem;
+    border-radius: 100px;
+    border: 1px solid #d6dee7;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.5s;
+}
+
+.button__additional:hover {
+    color: white;
+}
+
+.button__additional::after {
+	display: block;
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: black;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+  border-radius: 50%; /* Делаем круглым */
+  z-index: -1; /* Убедитесь, что фон не перекрывает содержимое */
+  transform-origin: left;
+}
+
+.button__additional:hover::after {
+    width: 300px; /* Размер градиента */
+    height: 300px;
+  }
+
 @media (max-width: 1366px) {
     .cases__text {
         font-size: 20vw;
     }
     .cases__img {
         width: 30%;
+    }
+    .post__preview--additional {
+        flex-direction: column;
+        width: 100%;
+    }
+    .cases__section {
+        margin-top: 30px;
+    }
+    .post__preview {
+        margin-bottom: 0px;
+    }
+}
+
+@media (max-width: 780px) {
+    .cases__posts {
+        grid-template-columns: 1fr;
     }
 }

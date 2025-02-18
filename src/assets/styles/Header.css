@@ -82,25 +82,9 @@ header a {
         cursor: pointer;
         position: relative;
         margin-left: 70px;
+        gap: 10px;
     }
-    
-    .topline {
-        display: block;
+    .hamburger__wrapper span {
         width: 30px;
-        height: 1px;
-        position: absolute;
-        left: 5px;
-        top: 15px;
-        background-color: black;
-    }
-    
-    .bottomline {
-        display: block;
-        width: 30px;
-        height: 1px;
-        position: absolute;
-        left: 5px;
-        bottom: 15px;
-        background-color: black;
     }
 }
