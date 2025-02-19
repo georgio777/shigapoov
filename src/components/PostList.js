@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
@@ -12,14 +13,38 @@ const PostsList = () => {
       .catch((error) => console.error('Ошибка загрузки:', error));
   }, []);
 
+
+  // Подбираем размер изображений под тип устройства
+  const getImageUrl = (post) => {
+    const featuredMediaArray = post._embedded?.['wp:featuredmedia'];
+    if (!featuredMediaArray) return '';
+
+    const featuredMedia = featuredMediaArray.find(media => media.media_details?.sizes);
+    if (window.innerWidth < 767) {
+      return featuredMedia?.media_details?.sizes?.medium?.source_url ||
+      featuredMedia?.media_details?.sizes?.full?.source_url
+    } else if (window.innerWidth < 2500) {
+      return featuredMedia?.media_details?.sizes?.medium_large?.source_url ||
+      featuredMedia?.media_details?.sizes?.full?.source_url
+    } else if (window.innerWidth > 2500) {
+      return featuredMedia?.media_details?.sizes?.large?.source_url ||
+      featuredMedia?.media_details?.sizes?.full?.source_url
+    }
+  };
+
   return (
     <div className='cases__posts'>
-      {posts.slice(0, visiblePosts).reverse().map((post) => (
-        <div key={post.id} className="post__preview">					
+      {posts.slice(0, visiblePosts).reverse().map((post, index) => (
+        <motion.div
+        key={post.id}
+        initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100}}
+        whileInView={{ opacity: 1, x: 0}}
+        transition={{ duration: 0.5}}
+        className="post__preview">					
 					<div>
 					<img
             className='post__preview--img'
-            src={post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''}
+            src={getImageUrl(post)}
             alt={post.title.rendered}
           />
           <Link to={`/post/${post.id}`}>
@@ -32,7 +57,7 @@ const PostsList = () => {
 						<div className='button__additional'>{post.acf.role}</div>
 					</div>
 					<a className='post__preview--href' href={post.acf.link} rel='noreferrer' target="_blank"><p>На сайт</p><span>&#129125;</span></a>
-        </div>
+        </motion.div>
       ))}
       {visiblePosts < posts.length && (
         <button onClick={() => setVisiblePosts(posts.length)}>Смотреть все</button>

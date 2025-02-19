@@ -9,16 +9,20 @@ const Home = () => {
   // Задаем отступ у слайдера исходя из высоты хэдэра
   const headerHeight = useContext(HeaderContext);
 
+
   return (
     <>
       <div className='outer__container'>
-        <section className='section__one'
+        <section
+        className='section__one'
         style={{ paddingTop: `${headerHeight}px` }}>
           <Slider />
         </section>
       </div>
-      <div className='lcontainer'>
-        <section className='cases__section'>
+      <div
+      className='lcontainer'>
+        <section
+        className='cases__section'>
           <AnimatedHeading heading={'Кейсы'} img={casesImg}/>
           <PostsList />
         </section>

@@ -7,7 +7,6 @@ const HeaderContext = createContext();
 
 const Layout = () => {
   const [headerHeight, setHeight] = useState(0);
-
   return (
     <div>
       <Header headerHeight={headerHeight} setHeight={setHeight}/>
@@ -19,5 +18,7 @@ const Layout = () => {
     </div>
   );
 };
+
+
 
 export { HeaderContext, Layout };
