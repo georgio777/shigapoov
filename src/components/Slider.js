@@ -1,16 +1,22 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
+import { motion, useTransform } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 import SliderButton from './SliderButton';
+import { ScrollContext } from '../App';
 
 
 function Slide1() {
   const [projectsCounter, setCounter] = useState(0);
   const [counterSpeed, setCounterSpeed] = useState(5);
-
+  const context = useContext(ScrollContext); // Берём весь контекст
   const isVisible = window.innerWidth > 1025
+
+  const scrollY = context?.scrollY || 0; // Безопасный доступ
+
+  const yOffset = useTransform(scrollY, [0, 500], [0, -200]); // Смещение
   
-  useEffect(() => {
+  useEffect(() => {  
+      
     if (isVisible && projectsCounter < 58) {
       setTimeout(() => {
         setCounter((value) => value + 1);
@@ -19,7 +25,8 @@ function Slide1() {
     }
   }, [projectsCounter, counterSpeed, isVisible]);
   return (
-    <div className='slide__content inner__container'>
+    <div
+    className='slide__content inner__container'>
       <div className='slide__left'>
         <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
         <p className='slide__left--text'>
@@ -28,12 +35,15 @@ function Slide1() {
         <SliderButton />
       </div>
       {isVisible && (
-        <div className='slide__right'>
+        <motion.div
+        style={{ y: yOffset }} // Привязываем смещение к скроллу
+        className='slide__right'>
           <div className='slide__right--inner'>
             <p className='slide__right--text'>Проектов реализовано</p>
-            <span className='slide__counter'>{projectsCounter}</span>
+            <span
+            className='slide__counter'>{projectsCounter}</span>
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
 )};

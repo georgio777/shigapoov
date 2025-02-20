@@ -42,15 +42,15 @@ const PostsList = () => {
         transition={{ duration: 0.5}}
         className="post__preview">					
 					<div>
-					<img
-            className='post__preview--img'
-            src={getImageUrl(post)}
-            alt={post.title.rendered}
-          />
-          <Link to={`/post/${post.id}`}>
-						<h2 className='post__preview--heading' dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
-            <p className='post__preview--descr' dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
-          </Link>
+            <img
+              className='post__preview--img'
+              src={getImageUrl(post)}
+              alt={post.title.rendered}
+            />
+            <Link to={`/post/${post.id}`}>
+              <h2 className='post__preview--heading' dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+              <p className='post__preview--descr' dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
+            </Link>
 					</div>
 					<div className='post__preview--additional'>
 						<div className='button__additional'>{post.acf.cooperation}</div>

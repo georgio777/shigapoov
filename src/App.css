@@ -11,6 +11,7 @@
 @import url(./assets/styles/Header.css);
 @import url(./assets/styles/Slider.css);
 @import url(./assets/styles/Cases.css);
+@import url(./assets/styles/Solutions.css);
 
 @font-face {
   font-family: 'Onest';
@@ -73,18 +74,9 @@ main {
   }
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
 
-::-webkit-scrollbar-track {
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgb(169, 169, 169);
-  border-radius: 10px;
-}
 
 html {
   scroll-behavior: smooth;
 }
+
