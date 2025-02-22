@@ -30,7 +30,7 @@ const Home = () => {
       </div>
       <div className='outer__container'>
         <section className='solutions__section'>
-          <div className='inner__container'>
+          <div className='inner__container slutions__heading--bg'>
             <AnimatedHeading heading={'Решения'} img={solutionsImg} headingClass={'solutions'}/>
           </div>
           <Solutions />

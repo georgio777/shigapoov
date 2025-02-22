@@ -1,9 +1,8 @@
 .solutions__section {
-    background-color: var(--bgcolor);
+    /* background-color: var(--bgcolor); */
     border-radius: var(--brr);
-    padding-top: 50px;
     margin-top: 50px;
-    height: 200vh;
+    padding-bottom: 90px;
 }
 
 .solutions__heading {
@@ -11,6 +10,13 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding-bottom: 100px;
+    background-color: var(--bgcolor); 
+}
+
+.solutions__section .slutions__heading--bg {
+    background-color: var(--bgcolor); 
+    padding-top: 50px;
 }
 
 .solutions__img {
@@ -23,6 +29,81 @@
     flex: 1;
     font-size: 15vw;
 }
+
+.solutions__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: max-height 0.2s linear;
+    overflow: hidden;
+    background-color: var(--bgcolor);
+    border-bottom-right-radius: var(--brr);
+    border-bottom-left-radius: var(--brr);
+    position: relative;
+}
+
+.solutions__wrapper::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+.solutions__wrapper:last-child::after {
+    display: none;
+}
+
+.inner__container {
+
+}
+
+.solutions__middle, .solutions__bottom, .solutions__cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.solutions__top {
+    display: flex;
+    margin-bottom: 200px;
+}
+
+.site__txt {
+    margin-right: 70px;
+    margin-top: 2vw;
+
+}
+
+.description__column {
+    margin-right: auto;
+}
+
+.solutions__button--open-modal {
+    margin-top: 2vw;
+}
+
+.solutions__middle {
+    margin-bottom: 150px;
+}
+
+.solutions__bottom {
+    margin-bottom: 90px;
+}
+
+.solutions__offer {
+    display: flex;
+}
+
+.description__column h2 {
+    font-weight: 700;
+    font-size: 10rem;
+    cursor: pointer;
+}
+
+
 
 @media (max-width: 1400px) {
     .solutions__text {
