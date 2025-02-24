@@ -1,66 +1,72 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import PostPreview from './PostPreview'; // Укажи правильный путь
 
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
   const [visiblePosts, setVisiblePosts] = useState(6);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  // Загружаем посты
   useEffect(() => {
-    fetch('https://a1w.ru/wp-json/wp/v2/posts?_embed')
-      .then((response) => response.json())
+    const controller = new AbortController();
+    setLoading(true);
+    fetch('https://a1w.ru/wp-json/wp/v2/posts?_embed', { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error('Ошибка загрузки постов');
+        return response.json();
+      })
       .then((data) => setPosts(data))
-      .catch((error) => console.error('Ошибка загрузки:', error));
+      .catch((error) => {
+        if (error.name !== 'AbortError') setError(error.message);
+      })
+      .finally(() => setLoading(false));
+    return () => controller.abort();
   }, []);
 
+  // Отслеживаем ширину окна
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  // Подбираем размер изображений под тип устройства
+  // Функция для получения URL картинки
   const getImageUrl = (post) => {
     const featuredMediaArray = post._embedded?.['wp:featuredmedia'];
-    if (!featuredMediaArray) return '';
+    if (!featuredMediaArray) return '/path/to/placeholder.jpg';
 
-    const featuredMedia = featuredMediaArray.find(media => media.media_details?.sizes);
-    if (window.innerWidth < 767) {
-      return featuredMedia?.media_details?.sizes?.medium?.source_url ||
-      featuredMedia?.media_details?.sizes?.full?.source_url
-    } else if (window.innerWidth < 2500) {
-      return featuredMedia?.media_details?.sizes?.medium_large?.source_url ||
-      featuredMedia?.media_details?.sizes?.full?.source_url
-    } else if (window.innerWidth > 2500) {
-      return featuredMedia?.media_details?.sizes?.large?.source_url ||
-      featuredMedia?.media_details?.sizes?.full?.source_url
+    const featuredMedia = featuredMediaArray[0];
+    const mediaSizes = featuredMedia?.media_details?.sizes;
+
+    if (windowWidth < 767) {
+      return mediaSizes?.medium?.source_url || mediaSizes?.full?.source_url || '/path/to/placeholder.jpg';
+    } else if (windowWidth < 2500) {
+      return mediaSizes?.medium_large?.source_url || mediaSizes?.full?.source_url || '/path/to/placeholder.jpg';
+    } else {
+      return mediaSizes?.large?.source_url || mediaSizes?.full?.source_url || '/path/to/placeholder.jpg';
     }
   };
 
   return (
-    <div className='cases__posts'>
-      {posts.slice(0, visiblePosts).reverse().map((post, index) => (
-        <motion.div
-        key={post.id}
-        initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100}}
-        whileInView={{ opacity: 1, x: 0}}
-        transition={{ duration: 0.5}}
-        className="post__preview">					
-					<div>
-            <img
-              className='post__preview--img'
-              src={getImageUrl(post)}
-              alt={post.title.rendered}
+    <div className="cases__posts">
+      {loading && <div>Загружаем посты...</div>}
+      {error && <div>Ошибка: {error}</div>}
+      {!loading && !error && (
+        <>
+          {posts.slice(0, visiblePosts).reverse().map((post, index) => (
+            <PostPreview
+              key={post.id}
+              post={post}
+              index={index}
+              getImageUrl={getImageUrl} // Передаём функцию как пропс
             />
-            <Link to={`/post/${post.id}`}>
-              <h2 className='post__preview--heading' dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
-              <p className='post__preview--descr' dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
-            </Link>
-					</div>
-					<div className='post__preview--additional'>
-						<div className='button__additional'>{post.acf.cooperation}</div>
-						<div className='button__additional'>{post.acf.role}</div>
-					</div>
-					<a className='post__preview--href' href={post.acf.link} rel='noreferrer' target="_blank"><p>На сайт</p><span>&#129125;</span></a>
-        </motion.div>
-      ))}
-      {visiblePosts < posts.length && (
-        <button onClick={() => setVisiblePosts(posts.length)}>Смотреть все</button>
+          ))}
+          {visiblePosts < posts.length && posts.length > 6 && (
+            <button onClick={() => setVisiblePosts(posts.length)}>Смотреть все</button>
+          )}
+        </>
       )}
     </div>
   );

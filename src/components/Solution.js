@@ -27,10 +27,13 @@ function Solution({value}) {
     }
   }, [isOpen]);
 
+  useEffect(()=>{
+    contentRef.current.style.maxHeight = `${topRef.current.scrollHeight}px`;
+  },[])
+
 	return (
 			<div
 			ref={contentRef}
-			style={{  maxHeight: '100px', }}
 			className="solutions__wrapper">
         <div className="inner__container">
           <div
@@ -44,7 +47,12 @@ function Solution({value}) {
               >{name}</h2>
               <p>{descroption}</p>
             </div>
-            <button className="solutions__button--open-modal">Этапы разработки и порядок оплат</button>
+            <div className="solutions__button--open-modal">
+              <span className="icon-arr"></span>
+              Этапы разработки
+              <br/>
+              и порядок оплат
+            </div>
           </div>
           <div className="solutions__middle">
             <div className="solutions__cards">
@@ -77,12 +85,12 @@ function Solution({value}) {
                 <p className="solutions__offer--text">Тариф {name}</p>
               </div>
               <div className="solutions__offer--right">
-                <a href="http://a1w.ru/wp-content/uploads/2025/02/129794.jpg" target="_blanc" download="report.pdf" className="download-btn">+</a>
+                <a href="http://a1w.ru/wp-content/uploads/2025/02/129794.jpg" target="_blanc" download="129794.jpg" className="icon-plus download-btn"> </a>
                 <p>PDF 1 MB</p>
               </div>
             </div>
             <div className="solutions__price">
-              <p>Стоимость от:</p>
+              <span>Стоимость от:</span>
               <p>{price}</p>
             </div>
           </div>

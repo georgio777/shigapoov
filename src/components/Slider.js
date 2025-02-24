@@ -50,39 +50,42 @@ function Slide1() {
 
 function Slide2() {
   return (
-    <div className='slide__content inner__container'>
+    <div
+    className='slide__content inner__container'>
       <div className='slide__left'>
         <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
         <p className='slide__left--text'>
           Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
         </p>
-        <button className='slider__button'></button>
+        <SliderButton />
       </div>
     </div>
 )};
 
 function Slide3() {
   return (
-    <div className='slide__content inner__container'>
+    <div
+    className='slide__content inner__container'>
       <div className='slide__left'>
         <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
         <p className='slide__left--text'>
           Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
         </p>
-        <button className='slider__button'></button>
+        <SliderButton />
       </div>
     </div>
 )};
 
 function Slide4() {
   return (
-    <div className='slide__content inner__container'>
+    <div
+    className='slide__content inner__container'>
       <div className='slide__left'>
         <h1 className='slide__heading'>Разработка сайтов под ключ</h1>
         <p className='slide__left--text'>
           Недорогие полнофункциональные решения<br/> для малого бизнеса и ИП
         </p>
-        <button className='slider__button'></button>
+        <SliderButton />
       </div>
     </div>
 )};
@@ -257,11 +260,11 @@ const Slider = ({ autoPlayInterval = 60000 }) => {
       {/* Кнопки навигации */}
       <div className="buttons__container inner__container">
         <button
-          className="prev-button slider__navigation--button sprite"
+          className="prev-button slider__navigation--button icon-leftang"
           onClick={() => { prevSlide(); resetAutoPlay(); }}
         />
         <button
-          className="next-button slider__navigation--button sprite"
+          className="next-button slider__navigation--button icon-rightang"
           onClick={() => { nextSlide(); resetAutoPlay(); }}
         />
       </div>

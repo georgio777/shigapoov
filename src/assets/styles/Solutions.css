@@ -1,5 +1,4 @@
 .solutions__section {
-    /* background-color: var(--bgcolor); */
     border-radius: var(--brr);
     margin-top: 50px;
     padding-bottom: 90px;
@@ -57,13 +56,13 @@
     display: none;
 }
 
-.inner__container {
-
-}
-
 .solutions__middle, .solutions__bottom, .solutions__cards {
     display: flex;
     justify-content: space-between;
+}
+
+.solutions__cards {
+    gap: 30px;
 }
 
 .solutions__top {
@@ -73,16 +72,47 @@
 
 .site__txt {
     margin-right: 70px;
-    margin-top: 2vw;
-
+    margin-top: 1.2vw;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 .description__column {
     margin-right: auto;
 }
 
+.description__column h2 {
+    font-weight: 700;
+    font-size: 10rem;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.description__column p {
+    font-size: 2rem;
+    color: black;
+    max-width: 700px;
+}
+
 .solutions__button--open-modal {
-    margin-top: 2vw;
+    margin-top: 1.2vw;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    display: flex;
+    gap: 15px;
+    padding: 16px 24px;
+    border-radius: var(--brr);
+    background: #D6DEE766;
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: black;
+}
+
+.solutions__button--open-modal span {
+    margin-top: 5px;
 }
 
 .solutions__middle {
@@ -95,15 +125,78 @@
 
 .solutions__offer {
     display: flex;
+    background-color: white;
+    padding: 30px 36px;
+    border-radius: var(--brr);
+    gap: 50px;
 }
 
-.description__column h2 {
+.solution__card--heading {
+    font-size: 2rem;
     font-weight: 700;
+}
+
+.solution__card--accent {
     font-size: 10rem;
-    cursor: pointer;
+    font-weight: 700;
+}
+
+.solution__card--description {
+    font-size: 1.8rem;
+    color: #637283;
 }
 
 
+.solutions__offer--heading {
+    font-size: 3.2rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.solutions__offer--text {
+    font-size: 1.6rem;
+    color: #637283;
+}
+
+.solutions__offer--left {
+    max-width: 400px;
+}
+
+.solutions__offer--right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.solutions__offer--right a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    border: 1px solid #D6DEE7;
+    border-radius: 50%;
+    font-size: 2rem;
+}
+
+.solutions__offer--right p {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #637283;
+}
+
+
+.solutions__price p {
+    font-size: 8rem;
+    font-weight: 300;
+}
+
+.solutions__price span {
+    font-size: 1.8rem;
+    color: #637283;
+    margin-bottom: 15px;
+}
 
 @media (max-width: 1400px) {
     .solutions__text {
